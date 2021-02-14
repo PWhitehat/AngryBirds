@@ -1,58 +1,62 @@
-// variables
-var fixedrect, movingrect;
-var test1, test2;
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+
+var world, engine;
+var box1, box2 ,box3 ,box4 ,box5, ground;
+var bird;
+var pig1, pig2;
+var log1, log2, log3, log4;
 
 function setup() {
+  
+  var canvas = createCanvas(1200,400);
+  
+  engine = Engine.create();
+  world = engine.world;
 
-  // creates canvas
-  createCanvas(1200,800);
+  box1 = new BOX(700, 320, 70, 70);
+  box2 = new BOX(920, 320, 70, 70);
+  box3 = new BOX(700, 240, 70, 70); 
+  box4 = new BOX(920, 240, 70, 70);
+  box5 = new BOX(810, 160, 70, 70);
 
-  //makes 2 rectangles
-  fixedrect = createSprite(200, 200, 50, 80);
-  movingrect = createSprite(400, 200, 80, 50);
+  log1 = new LOG(810, 260, 300, PI / 2);
+  log2 = new LOG(810, 180, 300, PI / 2);
+  log3 = new LOG(760, 120, 150, PI / 7);
+  log4 = new LOG(870, 120, 150, -PI / 7);
 
-  //fixedrect.debug = true;
-  //movingrect.debug = true;
+  pig1 = new PIG(810, 350);
+  pig2 = new PIG(810, 220);
 
-  fixedrect.shapeColor = "green";
-  movingrect.shapeColor = "blue";
+  bird = new BIRD(100, 100);
 
-  test1 = createSprite(300, 300, 50, 20);
-  test2 = createSprite(600, 300, 60, 20);
-
-  test1.shapeColor = "yellow";
-  test2.shapeColor = "cyan";
-
-  test1.velocityX = 3;
-  test2.velocityX = -3;
+  ground = new GROUND(600, height, 1200, 20);
 
 }
 
 function draw() {
 
-  background(255,255,255);  
+  background(0);
+  
+  Engine.update(engine);
 
-  movingrect.x = World.mouseX;
-  movingrect.y = World.mouseY;
+  box1.display();
+  box2.display();
+  box3.display();
+  box4.display();
+  box5.display();
 
-  if (isTouching(movingrect, fixedrect)) {
+  bird.display();
 
-    movingrect.shapeColor = "red";
-    fixedrect.shapeColor = "red";
+  log1.display();
+  log2.display();
+  log3.display();
+  log4.display();
 
-  }
+  pig1.display();
+  pig2.display();
 
-  else {
-
-    fixedrect.shapeColor = "green";
-    movingrect.shapeColor = "blue";
-
-  }
-
-  bounceOff(test1, test2);
-
-  //console.log(movingrect.x - fixedrect.x);
-
-  drawSprites();
+  ground.display();
 
 }
