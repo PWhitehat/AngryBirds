@@ -7,6 +7,13 @@ var box1, box2 ,box3 ,box4 ,box5, ground;
 var bird;
 var pig1, pig2;
 var log1, log2, log3, log4;
+var bkgrd;
+
+function preload() {
+
+  bkgrd = loadImage("sprites/bg.png");
+
+}
 
 function setup() {
   
@@ -37,7 +44,7 @@ function setup() {
 
 function draw() {
 
-  background(0);
+  background(bkgrd);
   
   Engine.update(engine);
 
