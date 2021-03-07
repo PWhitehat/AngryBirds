@@ -7,7 +7,7 @@ var world, engine;
 var box1, box2 ,box3 ,box4 ,box5, ground, platform;
 var bird;
 var pig1, pig2;
-var log1, log2, log3, log4, clog;
+var log1, log2, log3, log4;
 var bkgrd;
 var sling;
 
@@ -34,7 +34,6 @@ function setup() {
   log2 = new LOG(810, 180, 300, PI / 2);
   log3 = new LOG(760, 120, 150, PI / 7);
   log4 = new LOG(870, 120, 150, -PI / 7);
-  clog = new LOG(230, 180, 80, PI / 2);
 
   pig1 = new PIG(810, 350);
   pig2 = new PIG(810, 220);
@@ -45,7 +44,19 @@ function setup() {
 
   platform = new GROUND(150, 305, 300, 170);
 
-  sling = new CHAIN(bird.body, clog.body);
+  sling = new SlingShot(bird.body, {x: 200, y: 100});
+}
+
+function mouseDragged() {
+
+  Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+
+}
+
+function mouseReleased() {
+
+  sling.fly();
+
 }
 
 function draw() {
@@ -66,7 +77,6 @@ function draw() {
   log2.display();
   log3.display();
   log4.display();
-  clog.display();
 
   pig1.display();
   pig2.display();
