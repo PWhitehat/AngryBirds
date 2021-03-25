@@ -38,13 +38,13 @@ function setup() {
   pig1 = new PIG(810, 350);
   pig2 = new PIG(810, 220);
 
-  bird = new BIRD(100, 100);
+  bird = new BIRD(100, 50);
 
   ground = new GROUND(600, height, 1200, 20);
 
   platform = new GROUND(150, 305, 300, 170);
 
-  sling = new SlingShot(bird.body, {x: 200, y: 100});
+  sling = new SlingShot(bird.body, {x: 200, y: 50});
 }
 
 function mouseDragged() {
