@@ -59,6 +59,16 @@ function mouseReleased() {
 
 }
 
+function keyPressed() {
+
+  if (keyCode === 32) {
+
+    sling.attach(bird.body);
+
+  }
+
+}
+
 function draw() {
 
   background(bkgrd);
