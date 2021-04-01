@@ -10,6 +10,7 @@ var pig1, pig2;
 var log1, log2, log3, log4;
 var bkgrd;
 var sling;
+var gameState = "loaded";
 
 function preload() {
 
@@ -45,17 +46,23 @@ function setup() {
   platform = new GROUND(150, 305, 300, 170);
 
   sling = new SlingShot(bird.body, {x: 200, y: 50});
+
 }
 
 function mouseDragged() {
 
-  Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+  if (gameState !== "launched") {
+
+    Matter.Body.setPosition(bird.body, {x: mouseX, y: mouseY});
+
+  }
 
 }
 
 function mouseReleased() {
 
   sling.fly();
+  gameState = "launched";
 
 }
 
@@ -63,7 +70,7 @@ function keyPressed() {
 
   if (keyCode === 32) {
 
-    sling.attach(bird.body);
+    //sling.attach(bird.body);
 
   }
 
@@ -72,8 +79,12 @@ function keyPressed() {
 function draw() {
 
   background(bkgrd);
+
   
+
   Engine.update(engine);
+
+  
 
   box1.display();
   box2.display();
