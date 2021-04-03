@@ -8,13 +8,16 @@ var box1, box2 ,box3 ,box4 ,box5, ground, platform;
 var bird;
 var pig1, pig2;
 var log1, log2, log3, log4;
-var bkgrd;
+var bg = "sprites/bg.png";
+var bgIMG;
 var sling;
 var gameState = "loaded";
+var score = 0;
+
 
 function preload() {
 
-  bkgrd = loadImage("sprites/bg.png");
+  nightandday();
 
 }
 
@@ -76,15 +79,41 @@ function keyPressed() {
 
 }
 
+async function nightandday() {
+
+  var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Tokyo");
+  var responseJSON = await response.json();
+  var datetime = responseJSON.datetime;
+  var hour = datetime.slice(11,13);
+
+  if (hour >= 06 && hour <= 19) {
+
+    bg = "sprites/bg.png";
+
+  }
+
+  else {
+
+    bg = "sprites/night.png";
+
+  }
+
+  bgIMG = loadImage(bg);
+
+}
+
 function draw() {
 
-  background(bkgrd);
+  if (bgIMG) 
 
-  
+    background(bgIMG);
+
+  noStroke();
+  textSize(35);
+  fill("white");
+  text("Score " + score, width - 300, 50);
 
   Engine.update(engine);
-
-  
 
   box1.display();
   box2.display();
@@ -100,7 +129,9 @@ function draw() {
   log4.display();
 
   pig1.display();
+  pig1.score();
   pig2.display();
+  pig2.score();
 
   ground.display();
   platform.display();
