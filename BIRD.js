@@ -9,19 +9,27 @@ class BIRD extends BaseClass {
   display() {
     
     super.display();
-    if (this.body.velocity.x > 10 && this.body.position.x > 200) {
 
-      var position1 = [this.body.position.x, this.body.position.y];
+    if (gameState === "launched") {
 
-      this.trajectory.push(position1);
+      
+      if (this.body.velocity.x > 10 && this.body.position.x > 200) {
+
+        var position1 = [this.body.position.x, this.body.position.y];
+
+        this.trajectory.push(position1);
+
+      }
 
     }
 
     for (var i = 0; i < this.trajectory.length; i++) {
 
       image(this.smokeimage, this.trajectory[i][0], this.trajectory[i][1]);
-
+  
     }
+
+    
     
   }
 }
