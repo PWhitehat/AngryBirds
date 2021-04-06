@@ -17,7 +17,8 @@ var score = 0;
 
 function preload() {
 
-  nightandday();
+  //nightandday();
+  bgIMG = loadImage("sprites/bg.png");
 
 }
 
@@ -73,7 +74,10 @@ function keyPressed() {
 
   if (keyCode === 32) {
 
-    //sling.attach(bird.body);
+    bird.trajectory = [];
+    Matter.Body.setPosition(bird.body, {x: 200, y: 50});
+    sling.attach(bird.body);
+    gameState = "loaded";
 
   }
 
@@ -98,15 +102,13 @@ async function nightandday() {
 
   }
 
-  bgIMG = loadImage(bg);
-
 }
 
 function draw() {
 
-  if (bgIMG) 
+  //if (bgIMG) 
 
-    background(bgIMG);
+  background(bgIMG);
 
   noStroke();
   textSize(35);
